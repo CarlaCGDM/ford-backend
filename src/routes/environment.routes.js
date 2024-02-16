@@ -7,8 +7,9 @@ import {authJwt} from '../middlewares/index'
 router.post('/', [authJwt.verifyToken, authJwt.isEditor], environmentController.createEnvironment)
 
 router.get('/', environmentController.getEnvironments)
+
 router.get('/selected', environmentController.getSelectedEnvironment)
-router.get('/select/:environmentId',environmentController.selectEnvironmentById)
+router.put('/select/:environmentId',[authJwt.verifyToken, authJwt.isEditor],environmentController.selectEnvironmentById)
 
 router.get('/:environmentId', environmentController.getEnvironmentById)
 router.put('/:environmentId', [authJwt.verifyToken, authJwt.isEditor], environmentController.updateEnvironmentById)

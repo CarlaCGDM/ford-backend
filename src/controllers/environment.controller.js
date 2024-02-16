@@ -2,9 +2,9 @@ import Environment from '../models/Environment'
 
 export const createEnvironment = async (req,res) => 
 {
-    const {name, modelURL, imgURL, pathURL, description, author, license, exhibits} = req.body
+    const {name, modelURL, imgURL, pathURL, description, author, license, exhibits, panels, isUsed} = req.body
 
-    const newEnvironment = new Environment({name,modelURL,imgURL,pathURL,description,author,license,exhibits})
+    const newEnvironment = new Environment({name,modelURL,imgURL,pathURL,description,author,license,exhibits, panels, isUsed})
 
     const environmentSaved = await newEnvironment.save()
 
