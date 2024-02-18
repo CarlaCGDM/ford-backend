@@ -2,6 +2,12 @@ import Exhibit from '../models/Exhibit'
 
 export const createExhibit = async (req,res) => 
 {
+    // What do we get from the frontend?
+
+    console.log("Request: ")
+    console.log(req.body)
+    
+
     const {name, modelURL, imgURL, description, author, license} = req.body
 
     const newExhibit = new Exhibit({name,modelURL,imgURL,description,author,license})
