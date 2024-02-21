@@ -27,10 +27,20 @@ export const getExhibits = async (req,res) =>
 
 export const getExhibitById = async (req,res) => 
 {
-    const exhibit = await Exhibit.findById(req.params.exhibitId)
-    res.status(200).json(exhibit)
+    // Check if we're being sent one Id or mutiple Ids (separated with an & character)
 
-    // What if request is a string of multiple IDs? I need this to get the list of models
+    if (!req.params.exhibitId.includes("&"))
+    {
+        // If we are being sent just one Id:
+        const exhibit = await Exhibit.findById(req.params.exhibitId)
+        res.status(200).json(exhibit)
+
+    } else {
+        // If we are being sent multiple Ids:
+        const ids = req.params.exhibitId.split("&")
+        const exhibits = await Exhibit.find({ '_id': { $in: ids } });
+        res.status(200).json(exhibits)
+    }
 }
 
 export const updateExhibitById = async (req,res) => 
