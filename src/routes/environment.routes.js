@@ -4,15 +4,15 @@ const router = Router()
 import * as environmentController from '../controllers/environment.controller'
 import {authJwt} from '../middlewares/index'
 
-router.post('/', [authJwt.verifyToken, authJwt.isEditor], environmentController.createEnvironment)
+router.post('/', environmentController.createEnvironment)
 
 router.get('/', environmentController.getEnvironments)
 
 router.get('/selected', environmentController.getSelectedEnvironment)
-router.put('/select/:environmentId',[authJwt.verifyToken, authJwt.isEditor],environmentController.selectEnvironmentById)
+router.put('/select/:environmentId',environmentController.selectEnvironmentById)
 
 router.get('/:environmentId', environmentController.getEnvironmentById)
-router.put('/:environmentId', [authJwt.verifyToken, authJwt.isEditor], environmentController.updateEnvironmentById)
-router.delete('/:environmentId', [authJwt.verifyToken, authJwt.isEditor], environmentController.deleteEnvironmentById)
+router.put('/:environmentId', environmentController.updateEnvironmentById)
+router.delete('/:environmentId', environmentController.deleteEnvironmentById)
 
 export default router

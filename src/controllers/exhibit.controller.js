@@ -6,7 +6,7 @@ export const createExhibit = async (req,res) =>
 
     console.log("Request: ")
     console.log(req.body)
-    
+
 
     const {name, modelURL, imgURL, description, author, license} = req.body
 
@@ -22,13 +22,15 @@ export const createExhibit = async (req,res) =>
 export const getExhibits = async (req,res) => 
 {
     const exhibits = await Exhibit.find()
-    res.json(exhibits)
+    res.status(200).json(exhibits)
 }
 
 export const getExhibitById = async (req,res) => 
 {
     const exhibit = await Exhibit.findById(req.params.exhibitId)
     res.status(200).json(exhibit)
+
+    // What if request is a string of multiple IDs? I need this to get the list of models
 }
 
 export const updateExhibitById = async (req,res) => 
@@ -40,6 +42,6 @@ export const updateExhibitById = async (req,res) =>
 
 export const deleteExhibitById = async (req,res) => 
 {
-    await Exhibit.findByIdAndDelete(req.params.exhibitId)
-    res.status(204).json()
+    const deletedExhibit = await Exhibit.findByIdAndDelete(req.params.exhibitId)
+    res.status(204).json(deletedExhibit)
 }

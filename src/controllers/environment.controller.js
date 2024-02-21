@@ -4,7 +4,23 @@ export const createEnvironment = async (req,res) =>
 {
     const {name, modelURL, imgURL, pathURL, description, author, license, exhibits, panels, isUsed} = req.body
 
-    const newEnvironment = new Environment({name,modelURL,imgURL,pathURL,description,author,license,exhibits, panels, isUsed})
+    // exhibits and panels is a number
+    // we create an array of empty 
+
+    const modelSlots = []
+    const panelSlots = []
+
+    for (let i = 0; i < exhibits; i++) {
+        modelSlots.push(null) // <- Create a placeholder 3D model
+        
+    }
+
+    for (let i = 0; i < panels; i++) {
+        panelSlots.push(null) // <- Create a placeholder 3D model
+        
+    }
+
+    const newEnvironment = new Environment({name,modelURL,imgURL,pathURL,description,author,license, modelSlots, panelSlots, isUsed})
 
     const environmentSaved = await newEnvironment.save()
 

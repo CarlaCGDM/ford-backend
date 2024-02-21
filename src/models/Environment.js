@@ -8,14 +8,18 @@ const environmentSchema = new Schema({
     description: String,
     author: String,
     license: String,
-    exhibits: [{
+    modelSlots: [{
         ref: "Exhibit",
-        type: Schema.Types.ObjectId
+        type: Schema.Types.ObjectId,
+        null: true
     }],
-    panels: [
-        String //<--For now
-        // ref: "Panel",
-        // type: Schema.Types.ObjectId
+    panelSlots: [
+        {
+            // ref: "Panel",
+            // type: Schema.Types.ObjectId
+            type: String,
+            null: true
+        }
     ],
     isUsed: Boolean
 },
