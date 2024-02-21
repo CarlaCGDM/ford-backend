@@ -13,4 +13,6 @@ router.get('/:exhibitId', exhibitController.getExhibitById)
 router.put('/:exhibitId', exhibitController.updateExhibitById)
 router.delete('/:exhibitId', exhibitController.deleteExhibitById)
 
+router.get('/ids/:exhibitIds',exhibitController.getExhibitByIds)
+
 export default router

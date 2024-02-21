@@ -27,26 +27,20 @@ export const getExhibits = async (req,res) =>
 
 export const getExhibitById = async (req,res) => 
 {
-    // Check if we're being sent one Id or mutiple Ids (separated with an & character)
-
-    if (!req.params.exhibitId.includes("&"))
-    {
-        // If we are being sent just one Id:
         const exhibit = await Exhibit.findById(req.params.exhibitId)
         res.status(200).json(exhibit)
+}
 
-    } else {
-
-        // If we are being sent multiple Ids:
-        // Split and filter out the null Ids:
-        const ids = req.params.exhibitId.split("&").filter((id) => id != 'null')
-        console.log(ids)
+export const getExhibitByIds = async (req,res) => 
+{
+    // If we are being sent multiple Ids:
+    // Split by Ids:
+    const ids = req.params.exhibitIds.split("&")
+    console.log(ids)
         
-
-        // Obtain list of elements:
-        const exhibits = await Exhibit.find({ '_id': { $in: ids } });
-        res.status(200).json(exhibits)
-    }
+    // Obtain list of elements:
+    const exhibits = await Exhibit.find({ '_id': { $in: ids } });
+    res.status(200).json(exhibits)
 }
 
 export const updateExhibitById = async (req,res) => 
