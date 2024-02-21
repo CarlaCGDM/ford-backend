@@ -36,8 +36,14 @@ export const getExhibitById = async (req,res) =>
         res.status(200).json(exhibit)
 
     } else {
+
         // If we are being sent multiple Ids:
-        const ids = req.params.exhibitId.split("&")
+        // Split and filter out the null Ids:
+        const ids = req.params.exhibitId.split("&").filter((id) => id != 'null')
+        console.log(ids)
+        
+
+        // Obtain list of elements:
         const exhibits = await Exhibit.find({ '_id': { $in: ids } });
         res.status(200).json(exhibits)
     }
