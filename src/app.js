@@ -1,5 +1,7 @@
 //app.js configura la aplicación de express
 
+//test commit
+
 import express from 'express'
 import morgan from 'morgan' //middleware de express que nos muestra las peticiones que llegan a nuestro navegador
 import pkg from '../package.json'
