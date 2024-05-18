@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Get permissions
         run: |
-          sudo chown -R $USER:$USER /frontend-actions-runner/_work/ovt-frontend
+          sudo chown -R $USER:$USER /backend-actions-runner/_work/ovt-backend
       - name: Download files from the current repository
         uses: actions/checkout@v2
       - name: TO EC2 instance
