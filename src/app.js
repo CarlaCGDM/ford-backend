@@ -21,8 +21,13 @@ app.set('pkg', pkg) //guardar el valor de esta variable
 
 app.use(morgan('dev'))
 app.use(express.json())
-app.options('*', cors());
-app.use(cors())
+
+const corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200,
+};
+ 
+app.use(cors(corsOptions));
 
 app.get('/', (req,res) => {
     res.json({
