@@ -1,0 +1,22 @@
+on:
+  push:
+    branches: [master]
+    
+jobs:
+  deploy:
+    name: Deploy to Ec2 instance
+    runs-on: self-hosted
+    steps:
+      - name: Get permissions
+        run: |
+          sudo chown -R $USER:$USER /backend-actions-runner/_work/ovt-backend
+      - name: Download files from the current repository
+        uses: actions/checkout@v2
+      - name: TO EC2 instance
+        run: |
+          sudo npm install
+          sudo npm run build
+          sudo pm2 stop 0
+          sudo pm2 start 0
+          sudo pm2 save
+      
